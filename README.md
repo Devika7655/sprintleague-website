@@ -1,6 +1,36 @@
 # Sprint League
 
-Gamified productivity tracker with sprints, scoring, and squad accountability.
+Gamified productivity tracker with sprints, scoring, analytics, and squad accountability.
+
+## Live Demo
+
+https://devika7655.github.io/sprintleague-website/
+
+---
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- React 18
+- IndexedDB
+- Node.js
+
+---
+
+## Features
+
+- Sprint-based productivity tracking
+- Gamified scoring system
+- Task management dashboard
+- Analytics and performance tracking
+- Squad accountability system
+- Leaderboards and badges
+- Live clock and activity tracking
+- Responsive multi-page UI
+
+---
 
 ## Quick Start
 
@@ -8,43 +38,74 @@ Gamified productivity tracker with sprints, scoring, and squad accountability.
 node server.js
 ```
 
-Then open **http://localhost:3000** in your browser.
+Then open:
 
-> ⚠️ Must be served over HTTP — opening index.html directly as a file:// URL
-> breaks IndexedDB (login/register will silently fail).
-
-## Structure
-
+```text
+http://localhost:3000
 ```
+
+in your browser.
+
+> ⚠️ Must be served over HTTP — opening index.html directly as a file:// URL breaks IndexedDB functionality.
+
+---
+
+## Project Structure
+
+```text
 sprint-league/
-├── server.js          ← Dev server (Node built-ins only, no npm install needed)
-├── index.html         ← Dashboard
-├── tasks.html         ← Task manager + focus overlay
-├── analytics.html     ← Heatmap, WPM trend, charts
-├── friends.html       ← Squad / accountability
-├── league.html        ← Leaderboard, duels, badges
+├── server.js
+├── index.html
+├── tasks.html
+├── analytics.html
+├── friends.html
+├── league.html
 │
-├── css/               ← One CSS file per page + shared base
+├── css/
+│   ├── base.css
+│   ├── components.css
+│   ├── dashboard.css
+│   └── auth.css
+│
 └── js/
-    ├── auth-ui.js     ← React 18 auth modal (login + register)
-    ├── app.js         ← Header, logout, nav
-    ├── clock.js       ← Live clock
-    ├── dashboard.js   ← Dashboard data
-    ├── tasks.js       ← Task CRUD + sprint timer
-    ├── analytics.js   ← Analytics data
-    ├── friends.js     ← Squad data
-    ├── league.js      ← Leaderboard data
+    ├── auth-ui.js
+    ├── app.js
+    ├── clock.js
+    ├── dashboard.js
+    ├── tasks.js
+    ├── analytics.js
+    ├── friends.js
+    ├── league.js
     └── lib/
-        ├── db.js      ← IndexedDB wrapper (v3)
-        ├── auth.js    ← Register / login / logout
-        └── utils.js   ← Helpers
+        ├── db.js
+        ├── auth.js
+        └── utils.js
 ```
 
-## Auth Flow
+---
 
-1. On page load, `db.js` initialises IndexedDB (version 3)
-2. `app.js` calls `db.init()`, then shows/hides `<main>` based on session
-3. React mounts `AuthModal` into `#auth-root` — shows if not logged in
-4. Register stores user + stats records in IndexedDB; saves session to localStorage
-5. Login looks up user by email, verifies password hash, saves session
-6. Logout clears localStorage session → page reloads → modal reappears
+## Authentication Flow
+
+1. IndexedDB initializes on page load
+2. Session state is checked automatically
+3. React auth modal handles login and registration
+4. User data and statistics are stored locally
+5. Session persists using localStorage
+6. Logout clears session and reloads the application
+
+---
+
+## Purpose of the Project
+
+Sprint League was built as a gamified productivity platform to help users:
+- manage tasks efficiently
+- stay focused using sprint sessions
+- track productivity analytics
+- compete through leaderboards
+- improve accountability with squads
+
+---
+
+## Author
+
+Devika Srivastava
