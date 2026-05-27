@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprint League — Analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/analytics.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="logo">Sprint<span>League</span></a>
+      <nav class="nav">
+        <a href="index.html"     class="nav-btn">Dashboard</a>
+        <a href="tasks.html"     class="nav-btn">Tasks</a>
+        <a href="analytics.html" class="nav-btn active">Analytics</a>
+        <a href="friends.html"   class="nav-btn">Friends</a>
+        <a href="league.html"    class="nav-btn">League</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="user-info">
+        <div class="avatar" id="userAvatar">U</div>
+        <div class="username" id="username">User</div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- EOD BANNER -->
+    <div class="eod-banner" id="eodBanner">
+      <div class="eod-banner-left">
+        <div class="eod-pip"></div>
+        <div class="eod-banner-info">
+          <span class="eod-banner-label">End of Day</span>
+          <span class="eod-banner-target" id="eodTarget">18:00</span>
+        </div>
+        <div class="eod-banner-sep"></div>
+        <div class="eod-countdown">
+          <span class="eod-cd-val" id="eodH">—</span><span class="eod-cd-unit">h</span>
+          <span class="eod-cd-val" id="eodM">—</span><span class="eod-cd-unit">m</span>
+          <span class="eod-cd-rest">remaining</span>
+        </div>
+      </div>
+      <div class="eod-banner-right">
+        <span class="eod-task-stat" id="eodTaskLabel">0 / 0 done</span>
+        <div class="eod-track"><div class="eod-fill" id="eodFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">// performance intel</p>
+        <h1 class="page-title">Analytics</h1>
+      </div>
+      <div class="clock-block">
+        <div class="live-clock" id="liveTime">00:00</div>
+        <div class="live-date"  id="liveDate">—</div>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Sprints</div>
+        <div class="stat-value yellow" id="totalSprintsAna">0</div>
+        <div class="stat-sub">All time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Score</div>
+        <div class="stat-value yellow" id="avgScoreAna">0</div>
+        <div class="stat-sub">Per sprint</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Score</div>
+        <div class="stat-value blue" id="totalScoreAna">0</div>
+        <div class="stat-sub">Lifetime</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Streak</div>
+        <div class="stat-value yellow" id="streakAna">0</div>
+        <div class="stat-sub">Days active</div>
+      </div>
+    </div>
+
+    <!-- RECENT SPRINTS + CATEGORY BREAKDOWN -->
+    <div class="content-grid" style="margin-bottom:20px">
+
+      <!-- Recent Sprints -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Recent Sprints</span>
+          <span class="panel-stat" id="sprintCountBadge">0 total</span>
+        </div>
+        <div id="recentSprintsList" class="sprint-list">
+          <div class="empty-state">
+            <span class="empty-icon">⚡</span>
+            <span class="empty-text">No sprints yet.</span>
+            <a href="tasks.html" class="empty-cta">Start your first sprint →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Category Breakdown</span>
+        </div>
+        <div id="categoryBreakdown" class="breakdown-list">
+          <div class="empty-state">
+            <span class="empty-icon">📊</span>
+            <span class="empty-text">Complete sprints to see breakdown.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIVITY HEATMAP -->
+    <div class="panel" style="margin-bottom:20px">
+      <div class="panel-header">
+        <span class="panel-title">Activity — Last 52 Weeks</span>
+        <span class="panel-stat" id="activeDaysBadge">0 active days</span>
+      </div>
+      <div class="heatmap-wrap">
+        <div class="heatmap-grid" id="heatmapGrid"></div>
+      </div>
+      <div class="heatmap-legend">
+        <span>Less</span>
+        <div class="heat-cell heat-0"></div>
+        <div class="heat-cell heat-1"></div>
+        <div class="heat-cell heat-2"></div>
+        <div class="heat-cell heat-3"></div>
+        <div class="heat-cell heat-4"></div>
+        <span>More</span>
+      </div>
+    </div>
+
+    <!-- SCORE OVER TIME BAR CHART -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Score Trend — Last 14 Sprints</span>
+        <span class="panel-stat" id="avgScoreBadge">Avg: 0 pts</span>
+      </div>
+      <div class="score-chart-wrap">
+        <div class="score-chart" id="scoreChart">
+          <div class="chart-empty">Complete sprints to see your score trend</div>
+        </div>
+        <div class="score-chart-labels" id="scoreChartLabels"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="auth-root"></div>
+<script src="js/lib/db.js"></script>
+<script src="js/lib/auth.js"></script>
+<script src="js/lib/utils.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/app.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="js/auth-ui.js"></script>
+</body>
+</html>
