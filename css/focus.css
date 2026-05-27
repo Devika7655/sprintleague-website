@@ -1,0 +1,126 @@
+/* ═══════════════════════════════════════════════════
+   FOCUS.CSS — Sprint Focus Overlay
+   ═══════════════════════════════════════════════════ */
+
+.focus-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(9,9,11,0.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+.focus-overlay.active { display: flex; }
+
+body.in-focus { overflow: hidden; }
+
+.focus-lock-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--red);
+  border: 1px solid rgba(255,77,77,0.4);
+  padding: 6px 14px;
+  border-radius: var(--r-xs);
+  font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.lock-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--red);
+  animation: pipPulse 1.5s ease-in-out infinite;
+}
+
+.focus-label {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: 3px;
+  color: var(--t-3); font-weight: 600;
+  text-transform: uppercase;
+}
+
+.focus-task-name {
+  font-family: var(--sans);
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 900;
+  color: var(--t-1);
+  letter-spacing: -0.5px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.focus-timer {
+  font-family: var(--mono);
+  font-size: clamp(60px, 12vw, 100px);
+  font-weight: 700;
+  color: var(--yellow);
+  letter-spacing: -4px;
+  line-height: 1;
+}
+
+.focus-meta {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+.focus-meta-item { text-align: center; }
+.focus-meta-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2.5px;
+  color: var(--t-4); font-weight: 700; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.focus-meta-value {
+  font-family: var(--mono); font-size: 24px; font-weight: 700;
+  color: var(--t-1); letter-spacing: -0.5px;
+}
+
+.focus-bar-wrap {
+  width: min(400px, 80vw);
+  height: 4px;
+  background: var(--surf-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.focus-bar {
+  height: 100%;
+  background: var(--yellow);
+  border-radius: 2px;
+  transition: width 1s linear;
+  box-shadow: 0 0 12px rgba(232,255,71,0.5);
+}
+
+.focus-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Focus overlay buttons */
+.focus-actions .btn {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 2px;
+  font-weight: 700; text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.18s;
+  border: 1px solid;
+}
+.focus-actions .btn.primary {
+  background: var(--yellow); color: #000; border-color: var(--yellow);
+}
+.focus-actions .btn.primary:hover { background: var(--yellow-d); transform: translateY(-1px); }
+.focus-actions .btn.secondary {
+  background: transparent; color: var(--t-2); border-color: var(--b-2);
+}
+.focus-actions .btn.secondary:hover { border-color: var(--t-2); color: var(--t-1); }
+.focus-actions .btn.danger {
+  background: transparent; color: var(--red); border-color: rgba(255,77,77,0.4);
+}
+.focus-actions .btn.danger:hover { background: rgba(255,77,77,0.08); }
